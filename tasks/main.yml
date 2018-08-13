@@ -1,0 +1,21 @@
+---
+# tasks file for ansible-role-grpc-swift
+- name: Install grpc-swift
+  git:
+    repo: "{{ grpc_swift_git_url }}"
+    dest: "{{ grpc_swift_install_path }}"
+    update: "{{ grpc_swift_git_update }}"
+- name: Build the grpc-swift plugins
+  shell: "make"
+  args:
+    chdir: "{{ grpc_swift_install_path }}"
+- name: Copy protoc-gen-swift
+  copy:
+    src: "{{ grpc_swift_install_path }}/protoc-gen-swift"
+    dest: "{{ grpc_swift_binary_install_path }}/protoc-gen-swift"
+    mode: 0755
+- name: Copy protoc-gen-swiftgrpc
+  copy:
+    src: "{{ grpc_swift_install_path }}/protoc-gen-swiftgrpc"
+    dest: "{{ grpc_swift_binary_install_path }}/protoc-gen-swiftgrpc"
+    mode: 0755
