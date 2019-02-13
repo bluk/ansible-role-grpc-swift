@@ -18,6 +18,8 @@ install:
   - sudo touch /etc/ansible/hosts
   - "echo -e '[local]\nlocalhost ansible_connection=local' | sudo tee -a /etc/ansible/hosts > /dev/null"
 
+  - brew install nghttp2
+
 script:
   # Get macOS version string.
   - macos_version=$(sw_vers -productVersion)
